@@ -1,3 +1,3 @@
-Mission Statement:
+# Mission Statement
 
 Using SKlearn, we 
