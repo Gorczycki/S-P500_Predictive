@@ -7,3 +7,7 @@ Select a handful of equities in SPY that are positive, and then attempt to predi
 
 Alternate:
 Make a correlation between price of the VIX and the next-day price of SPY.
+
+We use a simple regression model with a neural network.
+
+Now need VIX daily close price in CSV
