@@ -33,17 +33,7 @@ for row in csvreader:
 
 
 numbers = []
-#numbers = np.array(numbers)
 
-#Takes out the unessecary string values to convert them later
-#for i in range(len(rows)):
-    #rows[i][0] = rows[i][0].strip().strip(r"'\"")
-    #rows[i][1] = rows[i][1].strip('\\\"')
-    #rows[i][2] = rows[i][2].strip('\\\"')
-    #if i != len(rows) - 1:
-        #rows[i].pop()
-#rows = np.array(rows)
-#vrows = np.array(vrows)
 
 for i in range(len(rows)):
     for j in range(len(vrows)):
