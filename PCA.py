@@ -114,8 +114,14 @@ print(cum_variance)
 #ax.quiver(0,0,0, -eig_vec[0,2], -eig_vec[1,2], -eig_vec[2,2], color = ['b'], length = 200)
 #pyplot.show()
 
+#finds the principle components and graphs the 2 most significant
+pca_data = np.dot(mean_numbers, eig_vec)
+print("Transformed data ", pca_data.shape)
+pyplot.plot(pca_data[:,0],pca_data[:,1],'.')
+pyplot.show()
 
-#transfroms the data from 3 parameters to 2, dropping the principle component of least significance, then graphs it
+#transfroms the data from 3 parameters to 2, dropping the principle component of least significance, then graphs it (not needed to do, just a quicker way)
+#produces same result as lines above
 pca = PCA(n_components = 2)
 pca.fit(mean_numbers)
 pca_data = pca.transform(mean_numbers)
