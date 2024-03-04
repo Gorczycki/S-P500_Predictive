@@ -7,8 +7,8 @@ from keras.models import Sequential
 from keras.layers import Dense, Dropout
 from keras.callbacks import EarlyStopping
 
-# Load your dataset
-data = pd.read_csv('SPYdata.csv')
+#finds the principle components and graphs the 2 most significant
+pca_data = np.dot(mean_numbers, eig_vec)
 
 # Assuming `data` is pre-loaded with relevant features and target variable 'Target'
 
