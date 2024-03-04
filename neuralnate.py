@@ -7,8 +7,6 @@ from keras.models import Sequential
 from keras.layers import Dense, Dropout
 from keras.callbacks import EarlyStopping
 
-#finds the principle components and graphs the 2 most significant
-pca_data = np.dot(mean_numbers, eig_vec)
 
 # Feature Scaling
 features = [col for col in data.columns if col != 'Target']
