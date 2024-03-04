@@ -10,8 +10,6 @@ from keras.callbacks import EarlyStopping
 #finds the principle components and graphs the 2 most significant
 pca_data = np.dot(mean_numbers, eig_vec)
 
-# Assuming `data` is pre-loaded with relevant features and target variable 'Target'
-
 # Feature Scaling
 features = [col for col in data.columns if col != 'Target']
 scaler = StandardScaler()
