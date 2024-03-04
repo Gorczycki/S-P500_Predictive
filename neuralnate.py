@@ -6,50 +6,48 @@ from sklearn.model_selection import train_test_split
 from keras.models import Sequential
 from keras.layers import Dense, Dropout
 from keras.callbacks import EarlyStopping
-data1 = pd.read_csv('SPYdata.csv')
-data2 = pd.read_csv('VIXdata.csv')
-combined_data = pd.merge(dataset1, dataset2, on='Date', how='inner')
 
-# Feature Scaling
-features = [col for col in data.columns if col != 'Target']
-scaler = StandardScaler()
-data_scaled = scaler.fit_transform(data[features])
+dataspy = pd.read_csv('SPYdata.csv')
+datavix = pd.read_csv('VIXdata.csv')
 
-# PCA for feature reduction
-pca = PCA(n_components=2)
-principal_components = pca.fit_transform(data_scaled)
-principal_df = pd.DataFrame(data=principal_components, columns=['PC1', 'PC2'])
+spy_features = dataspy[features1]  # Make sure to use the same features as used in training
+vix_features = datavix[features2]
 
-# Prepare final dataset for training
-X = principal_df
-y = data['Target'].values  # Assuming 'Target' is your target variable
+scalar1 = StandardScaler()
+scalar2 = StandardScalar()
 
-# Split data into training and test sets
+
+
+spy_scaled = scaler1.transform(spy_features)
+vix_scaled = scaler2.transform(vix_features)
+
+spy_pca = pca1.transform(spy_scaled)
+vix_pca = pca2.transform(vix_scaled)
+
+principal_components1 = pca1.fit_transform(data1_scaled)
+principal_components2 = pca2.fit_transform(data2_scaled)
+
+X = np.concatenate([spy_pca, vix_pca], axis=1)
+y = dataspy['Target'].values 
+
+
+model = build_model(X.shape[1])
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
-
-# Neural Network Model with Regularization
-def build_model(input_shape):
-    model = Sequential([
-        Dense(64, activation='relu', input_shape=(input_shape,)),
-        Dropout(0.2),  # Dropout layer to prevent overfitting
-        Dense(32, activation='relu'),
-        Dropout(0.2),
-        Dense(1, activation='linear')
-    ])
-    model.compile(optimizer='adam', loss='mean_squared_error')
-    return model
-
-model = build_model(X_train.shape[1])
-
-# Early Stopping to prevent overfitting
 early_stopping = EarlyStopping(monitor='val_loss', patience=10, restore_best_weights=True)
-
-# Model Training
 model.fit(X_train, y_train, validation_split=0.2, epochs=100, batch_size=32, callbacks=[early_stopping])
-
-# Evaluate Model
 loss = model.evaluate(X_test, y_test)
 print(f'Mean Squared Error on Test Set: {loss}')
+
+
+
+
+predictions = model.predict(new_X)
+
+# Optionally, convert predictions to a DataFrame
+predictions_df = pd.DataFrame(predictions, columns=['Predicted_Target'])
+
+# Print or save the predictions
+print(predictions_df)
 
 # Predictions
 # For new predictions, ensure you scale and PCA-transform the new data similarly
