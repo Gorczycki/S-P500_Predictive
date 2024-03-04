@@ -6,7 +6,9 @@ from sklearn.model_selection import train_test_split
 from keras.models import Sequential
 from keras.layers import Dense, Dropout
 from keras.callbacks import EarlyStopping
-
+data1 = pd.read_csv('SPYdata.csv')
+data2 = pd.read_csv('VIXdata.csv')
+combined_data = pd.merge(dataset1, dataset2, on='Date', how='inner')
 
 # Feature Scaling
 features = [col for col in data.columns if col != 'Target']
